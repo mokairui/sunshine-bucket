@@ -1,5 +1,7 @@
 package com.sunshine;
 
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
+
 import java.util.concurrent.Callable;
 
 /**
@@ -9,8 +11,13 @@ import java.util.concurrent.Callable;
  */
 public class MonitorMethod {
     
-    public static Object intercept(Callable<?> callable) throws Exception {
+    public static Object intercept(@SuperCall Callable<?> callable) throws Exception {
         long start = System.currentTimeMillis();
+        try {
+            return callable.call();
+        } finally {
+            System.out.println("方法耗时: " + (System.currentTimeMillis() - start) + "ms");
+        }
     }
     
 }
