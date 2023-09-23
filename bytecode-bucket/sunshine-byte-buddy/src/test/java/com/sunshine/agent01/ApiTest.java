@@ -9,6 +9,12 @@ public class ApiTest {
     
     public static void main(String[] args) {
         System.out.println("hi java agent!");
+        ApiTest apiTest = new ApiTest();
+        apiTest.echoHi();
+    }
+    
+    private void  echoHi() {
+        System.out.println("hi agent!");
     }
     
 }

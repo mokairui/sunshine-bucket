@@ -53,7 +53,7 @@
                             <addClasspath>true</addClasspath>
                         </manifest>
                         <manifestEntries>
-                            <Premain-Class>com.sunshine.agent01.MyAgent</Premain-Class>
+                            <Premain-Class>com.sunshine.agent02.MyAgent</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         </manifestEntries>
                     </archive>
