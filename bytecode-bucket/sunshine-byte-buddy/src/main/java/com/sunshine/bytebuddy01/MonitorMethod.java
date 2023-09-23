@@ -1,4 +1,4 @@
-package com.sunshine;
+package com.sunshine.bytebuddy01;
 
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 
