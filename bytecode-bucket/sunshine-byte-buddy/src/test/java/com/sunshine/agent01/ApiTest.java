@@ -17,13 +17,14 @@ public class ApiTest {
         ApiTest apiTest = new ApiTest();
         apiTest.echoHi();
         
-        List<String> list = new ArrayList<>();
-        while (true) {
-            TimeUnit.SECONDS.sleep(2);
-            list.add("你好 JavaAgent!");
-            list.add("你好 JavaAgent!");
-            list.add("你好 JavaAgent!");
-        }
+        /* agent04 使用 */
+//        List<String> list = new ArrayList<>();
+//        while (true) {
+//            TimeUnit.SECONDS.sleep(2);
+//            list.add("你好 JavaAgent!");
+//            list.add("你好 JavaAgent!");
+//            list.add("你好 JavaAgent!");
+//        }
     }
     
     private void  echoHi() {

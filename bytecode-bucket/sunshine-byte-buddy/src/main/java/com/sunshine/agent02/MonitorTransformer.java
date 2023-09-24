@@ -3,7 +3,9 @@ package com.sunshine.agent02;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
+import net.bytebuddy.dynamic.ClassFileLocator;
 import net.bytebuddy.matcher.ElementMatchers;
+import net.bytebuddy.pool.TypePool;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
@@ -24,6 +26,7 @@ public class MonitorTransformer implements ClassFileTransformer {
         classNameSet.add("com.sunshine.agent01.ApiTest");
     }
 
+    // 这个方法中 transform 中是不允许重复申明类信息的,这里的执行段是在被加载到jvm之前, 可以做一些字节码的转换
     @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
         String currentClassName = className.replaceAll("/", ".");
@@ -35,17 +38,32 @@ public class MonitorTransformer implements ClassFileTransformer {
 
         try {
             /* 
-                    不能使用 byteBuddy 的方法来在这里完成字节码的修改, 因为可能这个类已经被加载了, 而bytebuddy这里方法都是新建了一个类,
-                在这个方法中 transform 中是不允许重复申明类信息的,这里的执行段是在被加载到jvm之前, 可以做一些字节码的转换
-                很遗憾这个只能使用 javaassist 或则 asm (目前感觉是这样 需要进一步了解, 可能理解有误). 当然 bytebuddy 也是支持在加载到
-                jvm 之前就对字节码进行修改的操作, 使用 AgentBuild 就可以做到他优化了使用方式, 不用自己再去定义 ClassFileTransformer
-                或则在 类信息的字节码被加载到了 jvm 中之后再去使用 byteBuddy 的 redefine 来重新定义类信息
+                    不能使用 byteBuddy 的方法redefine直接定义class来在这里完成字节码的修改, 因为可能这个类已经被加载了, 
+                而bytebuddy.redefine(Class.forName( className ) 这个是需要在类还没有被 jvm 加载之前使用, 
+                除非使用 typePool.describe() 这种方式实现
+                
+                * redefine(TypeDescription, ClassFileLocator)：
+                    输入参数：使用 Byte Buddy 的 TypeDescription 对象和 ClassFileLocator 对象作为参数。
+                    需要首先通过 TypePool 创建一个 TypeDescription 对象来描述要重新定义的类。
+                    可以在运行期间重新定义已经加载的类。
+                    适用于已经加载的类的重新定义场景。
+                    
+                * redefine(Class<?>, boolean, ClassLoader)：
+                    输入参数：使用原始的 Java Class 对象、布尔值和类加载器作为参数。
+                    不需要准备工作，直接使用传递进来的 Class 对象进行重新定义。
+                    用于重新定义尚未加载的类。
+                    布尔值参数表示是否保留原始类的调试信息。
+                    类加载器用于加载重新定义后的类。
+                    适用于未加载的类的重新定义场景。
+                
+                而这个方法中是不允许定义已经加载的类信息的类
             */ 
-//            new ByteBuddy()
-//                    .redefine(Class.forName(currentClassName, false, loader))
-//                    .visit(Advice.to(MonitorAdvice.class).on(ElementMatchers.any()))
-//                    .make();
-            return classfileBuffer;
+            TypePool typePool = TypePool.Default.ofSystemLoader();
+            return new ByteBuddy()
+                    .redefine(typePool.describe(currentClassName).resolve(), ClassFileLocator.ForClassLoader.ofSystemLoader())
+                    .visit(Advice.to(MonitorAdvice.class).on(ElementMatchers.any()))
+                    .make()
+                    .getBytes();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
