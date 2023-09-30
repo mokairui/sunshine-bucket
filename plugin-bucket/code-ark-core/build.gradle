@@ -1,19 +1,38 @@
 plugins {
     id 'java'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 group = 'com.sunshine'
 version = '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
+    mavenLocal()
+    maven {
+        url 'https://repo1.maven.org/maven2/'
+    }
 }
 
 dependencies {
+    // 运行时依赖
+    implementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.12.6'
+    implementation group: 'net.bytebuddy', name: 'byte-buddy-agent', version: '1.12.6'
+    implementation group: 'cn.hutool', name: 'hutool-all', version: '5.7.19'
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.79'
+
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.34'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
+}
+
+shadowJar {
+    manifest {
+        attributes(
+                'Premain-Class': 'com.sunshine.PreAgent'
+        )
+    }
 }
