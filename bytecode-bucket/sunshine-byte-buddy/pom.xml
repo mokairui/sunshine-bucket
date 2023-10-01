@@ -24,6 +24,12 @@
         </dependency>
 
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.18</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
@@ -57,7 +63,8 @@
 <!--                            <Premain-Class>com.sunshine.agent02.MyAgent</Premain-Class>-->
 <!--                            <Premain-Class>com.sunshine.agent03.MyAgent</Premain-Class>-->
 <!--                            <Premain-Class>com.sunshine.agent04.MyAgent</Premain-Class>-->
-                            <Premain-Class>com.sunshine.agent05.MyAgent</Premain-Class>
+<!--                            <Premain-Class>com.sunshine.agent05.MyAgent</Premain-Class>-->
+                            <Premain-Class>com.sunshine.agentplugin.PreAgent</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         </manifestEntries>
                     </archive>

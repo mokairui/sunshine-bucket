@@ -1,10 +1,13 @@
 package com.sunshine.codearkplugin;
 
+import cn.hutool.core.util.StrUtil;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.RunConfigurationExtension;
 import com.intellij.execution.configurations.JavaParameters;
+import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.RunnerSettings;
+import com.sunshine.codearkplugin.util.PluginUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +20,15 @@ public class PreRunConfigExtension extends RunConfigurationExtension {
     
     @Override
     public <T extends RunConfigurationBase<?>> void updateJavaParameters(@NotNull T t, @NotNull JavaParameters javaParameters, @Nullable RunnerSettings runnerSettings) throws ExecutionException {
-        
+        String agentCoreJarPath = PluginUtil.getAgentCoreJarPath();
+        if (StrUtil.isBlank(agentCoreJarPath)) {
+            return;
+        }
+
+        String mainClass = javaParameters.getMainClass();
+        String packageName = mainClass.substring(0, mainClass.lastIndexOf("."));
+        ParametersList vmParametersList = javaParameters.getVMParametersList();
+        vmParametersList.addParametersString("-javaagent:" + agentCoreJarPath + "=" + packageName);
         System.out.println(javaParameters.getVMParametersList());
     }
 

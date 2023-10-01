@@ -23,7 +23,8 @@ public class MyAgent {
         // byteBuddy 在字节码未被加载到jvm时对字节码的转换操作, byteBuddy 一般用这种方式 已经封装过了
         new AgentBuilder.Default()
 //                .type(ElementMatchers.nameStartsWith("com.sunshine.agent01."))
-                .type(ElementMatchers.named("com.sunshine.agent01.ApiTest"))
+//                .type(ElementMatchers.named("com.sunshine.agent01.ApiTest"))
+                .type(ElementMatchers.nameStartsWith("com.sunshine"))
                 .transform((builder, type, classLoader, module, domain) ->
                         builder.visit(Advice.to(MonitorTransformer.MonitorAdvice .class).on(ElementMatchers.any())))
                 .installOn(inst);
