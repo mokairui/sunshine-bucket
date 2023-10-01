@@ -17,10 +17,10 @@
     <!-- 添加运行配置的使用 过滤步骤 -->
 <!--    <stepsBeforeRunProvider implementation="com.sunshine.codearkplugin.PreBeforeRunTaskProvider"/>-->
     
-    <!--  -->
+    <!-- 修改 java 运行程序的配置信息 -->
     <java.programPatcher implementation="com.sunshine.codearkplugin.PreJavaProgramPatch"/>
     
     <!-- 运行配置使用的扩展 -->
-    <runConfigurationExtension implementation="com.sunshine.codearkplugin.PreRunConfigExtension"/>
+<!--    <runConfigurationExtension implementation="com.sunshine.codearkplugin.PreRunConfigExtension"/>-->
   </extensions>
 </idea-plugin>
