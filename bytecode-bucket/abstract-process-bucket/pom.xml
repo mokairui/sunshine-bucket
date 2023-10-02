@@ -12,6 +12,10 @@
         <module>abstract-process-basic</module>
         <module>abstract-process-demo</module>
     </modules>
+    
+    <properties>
+        <abstract-processor-version>1.0-SNAPSHOT</abstract-processor-version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -25,5 +29,15 @@
             <version>1.5.5.Final</version>
         </dependency>
     </dependencies>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sunshine</groupId>
+                <artifactId>abstract-process-basic</artifactId>
+                <version>${abstract-processor-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

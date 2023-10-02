@@ -11,5 +11,12 @@
 
     <artifactId>abstract-process-demo</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sunshine</groupId>
+            <artifactId>abstract-process-basic</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>
