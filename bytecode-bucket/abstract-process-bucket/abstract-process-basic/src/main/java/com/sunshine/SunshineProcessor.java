@@ -22,19 +22,24 @@ import java.util.Set;
  * @since 2023/10/2
  */
 @SupportedAnnotationTypes({"com.sunshine.annotation.ApiAnnotation"})
-//@SupportedSourceVersion(SourceVersion.RELEASE_17)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
 public class SunshineProcessor extends AbstractProcessor {
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
+        System.out.println("process init");
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        System.out.println("123");
+        System.out.println("Abstract Process start!");
         Messager messager = processingEnv.getMessager();
+        System.out.println("messager: " + messager);
+        messager.printMessage(Diagnostic.Kind.NOTE, "Print: Hello World!");
+        messager.printMessage(Diagnostic.Kind.WARNING, "Print: Hello World!");
+        messager.printMessage(Diagnostic.Kind.NOTE, "Print: " + annotations);
         for (TypeElement typeElement : annotations) {
             for (Element element : roundEnv.getElementsAnnotatedWith(typeElement)) {
                 messager.printMessage(Diagnostic.Kind.WARNING, "Print: " + element.toString());
@@ -44,10 +49,7 @@ public class SunshineProcessor extends AbstractProcessor {
                 ApiAnnotation annotation = element.getAnnotation(ApiAnnotation.class);
             }
         }
-        System.out.println("Abstract Processor!");
-        return true;
+        return false;
     }
-    
-    
 
 }
