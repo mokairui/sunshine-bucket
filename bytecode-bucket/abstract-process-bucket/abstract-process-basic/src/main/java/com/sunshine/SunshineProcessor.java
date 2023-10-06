@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  * @author Mokairui
- * @description
+ * @description jdk1.8 的 AbstractProcessor 注解解释器使用
  * @since 2023/10/2
  */
 @SupportedAnnotationTypes({"com.sunshine.annotation.ApiAnnotation"})
@@ -29,7 +29,6 @@ public class SunshineProcessor extends AbstractProcessor {
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        System.out.println("process init");
     }
 
     @Override

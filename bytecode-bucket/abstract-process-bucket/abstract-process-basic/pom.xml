@@ -3,13 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.sunshine</groupId>
-        <artifactId>abstract-process-bucket</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
 
+    <groupId>com.sunshine</groupId>
     <artifactId>abstract-process-basic</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -27,7 +24,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <!--Disable annotation processing for ourselves，关闭注解处理器-->
+                    <!--Disable annotation processing for ourselves，关闭注解处理器 如果引入了 auto-service 则不需要添加-->
 <!--                    <compilerArgument>-proc:none</compilerArgument>-->
                 </configuration>
             </plugin>
