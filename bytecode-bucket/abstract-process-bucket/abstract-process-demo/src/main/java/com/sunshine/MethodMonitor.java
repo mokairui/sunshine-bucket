@@ -7,7 +7,6 @@ import com.sunshine.annotation.ApiAnnotation;
  * @description
  * @since 2023/10/2
  */
-@ApiAnnotation(date = "2023-10-03")
 public class MethodMonitor {
     
     @ApiAnnotation(date = "2023-10-01")
