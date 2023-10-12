@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sunshine</groupId>
-    <artifactId>mapstruct-core</artifactId>
+    <artifactId>mapstract-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,7 +13,18 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     
+    <dependencies>
+        <dependency>
+            <groupId>com.sunshine</groupId>
+            <artifactId>mapstruct-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sunshine</groupId>
+            <artifactId>mapstruct-process</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
