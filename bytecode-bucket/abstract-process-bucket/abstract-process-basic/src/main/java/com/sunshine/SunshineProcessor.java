@@ -24,8 +24,13 @@ import java.util.Set;
 /**
  * @author Mokairui
  * @description jdk1.8 的 AbstractProcessor 注解解释器使用
+ *                  ExecutableElement 表示一个方法或构造函数。可以使用 getSimpleName() 方法获取名称，使用 getParameters() 方法获取参数列表，使用 getReturnType() 方法获取返回类型等
+ *                  PackageElement 表示一个 Java 包。可以使用 getQualifiedName() 方法获取包名
+ *                  TypeParameterElement 表示一个类型参数（泛型）。可以使用 getSimpleName() 方法获取名称, 可以使用 asType() 方法获取参数类型
+ *                  VariableElement 表示一个字段或参数。可以使用 getSimpleName() 方法获取名称，使用 getModifiers() 方法获取修饰符，使用 asType() 方法获取变量类型等
  *                  
- *                  
+ *                  AnnotationMirror 表示注解的镜像，即注解的原始信息。可以使用 getAnnotationType() 方法获取注解类型元素，使用 getElementValues() 方法获取注解的属性值等
+ *                  AnnotationValue 表示注解的属性值。可以使用 getValue() 方法获取属性值
  * @since 2023/10/2
  */
 @SupportedAnnotationTypes({"com.sunshine.annotation.ApiAnnotation"})

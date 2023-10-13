@@ -65,9 +65,6 @@ public class MappingProcess extends AbstractProcessor {
                 // 获取接口下所有的属性
                 List<? extends Element> enclosedElements = element.getEnclosedElements();
                 for (Element interfaceElement : enclosedElements) {
-                    if (interfaceElement.getKind() == ElementKind.FIELD) {
-                        
-                    }
                     if (interfaceElement.getKind() == ElementKind.METHOD) {
                         
                     }
