@@ -1,10 +1,7 @@
 package com.sunshine;
 
-import com.sunshine.annotation.ApiAnnotation;
 import com.sunshine.dto.UserDTO;
 import com.sunshine.po.UserPO;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 /**
  * @author Mokairui
@@ -14,9 +11,7 @@ import org.mapstruct.factory.Mappers;
 //@Mapper
 @Mapper
 public interface UserMapper {
-    
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-    
+
     UserDTO userPOToUserDTO(UserPO userPO);
-    
+
 }

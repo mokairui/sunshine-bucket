@@ -27,4 +27,25 @@
         </dependency>
     </dependencies>
 
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.8.0</version>-->
+<!--                <configuration>-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                    &lt;!&ndash;                    <annotationProcessorPaths>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <path>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <groupId>com.sunshine</groupId>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <artifactId>abstract-process-basic</artifactId>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <version>${abstract-processor-version}</version>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </path>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </annotationProcessorPaths>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
 </project>

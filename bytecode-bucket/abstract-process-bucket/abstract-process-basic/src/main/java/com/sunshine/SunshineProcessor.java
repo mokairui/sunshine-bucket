@@ -99,7 +99,7 @@ public class SunshineProcessor extends AbstractProcessor {
                         pw.println("}");
                         pw.flush();
                     }
-                    
+
                 } catch (IOException e) {
                     messager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());
                 }
