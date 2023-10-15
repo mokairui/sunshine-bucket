@@ -1,12 +1,12 @@
-package com.sunshine.service.processor;
+package com.sunshine.service.processor.spi;
 
 import com.sunshine.application.process.context.ProcessContext;
-import com.sunshine.service.generate.IGenerator;
-import com.sunshine.service.generate.impl.DefaultGeneratorImpl;
-import com.sunshine.service.generate.model.ModelElement;
+import com.sunshine.service.processor.generate.IGenerator;
+import com.sunshine.service.processor.generate.impl.DefaultGeneratorImpl;
+import com.sunshine.service.processor.model.ModelElement;
+import com.sunshine.service.processor.ModelElementProcessor;
 
 import javax.lang.model.element.Element;
-import java.util.List;
 
 /**
  * @author Mokairui

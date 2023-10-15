@@ -1,4 +1,4 @@
-package com.sunshine.service.generate;
+package com.sunshine.service.processor.generate;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

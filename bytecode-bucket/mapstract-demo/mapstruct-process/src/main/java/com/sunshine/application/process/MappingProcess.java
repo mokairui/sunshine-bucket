@@ -2,9 +2,6 @@ package com.sunshine.application.process;
 
 import com.google.auto.service.AutoService;
 import com.sunshine.application.process.context.ProcessContext;
-import com.sunshine.service.generate.IGenerator;
-import com.sunshine.service.generate.impl.DefaultGeneratorImpl;
-import com.sunshine.service.generate.model.ModelElement;
 import com.sunshine.service.processor.ModelElementProcessor;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -16,14 +13,11 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.ServiceLoader;
 import java.util.Set;
 

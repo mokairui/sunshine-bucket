@@ -1,6 +1,6 @@
-package com.sunshine.service.generate;
+package com.sunshine.service.processor.generate;
 
-import com.sunshine.service.generate.model.ModelElement;
+import com.sunshine.service.processor.model.ModelElement;
 import com.sunshine.application.process.context.ProcessContext;
 
 /**

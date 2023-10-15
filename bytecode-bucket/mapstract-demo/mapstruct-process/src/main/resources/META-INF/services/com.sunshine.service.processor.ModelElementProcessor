@@ -1,2 +1,2 @@
-com.sunshine.service.processor.ModelCreatedProcessor
-com.sunshine.service.processor.ModelRenderProcessor
+com.sunshine.service.processor.spi.ModelCreatedProcessor
+com.sunshine.service.processor.spi.ModelRenderProcessor

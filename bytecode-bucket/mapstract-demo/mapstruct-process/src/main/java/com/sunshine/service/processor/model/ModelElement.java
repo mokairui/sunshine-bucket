@@ -1,4 +1,4 @@
-package com.sunshine.service.generate.model;
+package com.sunshine.service.processor.model;
 
 import java.util.List;
 

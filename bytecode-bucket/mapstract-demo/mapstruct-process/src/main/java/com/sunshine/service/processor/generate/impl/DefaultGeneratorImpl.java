@@ -1,7 +1,7 @@
-package com.sunshine.service.generate.impl;
+package com.sunshine.service.processor.generate.impl;
 
-import com.sunshine.service.generate.AbstractGenerator;
-import com.sunshine.service.generate.model.ModelElement;
+import com.sunshine.service.processor.generate.AbstractGenerator;
+import com.sunshine.service.processor.model.ModelElement;
 import com.sunshine.application.process.context.ProcessContext;
 
 import javax.tools.JavaFileObject;
