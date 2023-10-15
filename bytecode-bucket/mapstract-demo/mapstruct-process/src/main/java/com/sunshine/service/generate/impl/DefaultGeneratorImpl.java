@@ -1,12 +1,11 @@
 package com.sunshine.service.generate.impl;
 
 import com.sunshine.service.generate.AbstractGenerator;
-import com.sunshine.service.generate.model.GeneratorContext;
+import com.sunshine.service.generate.model.ModelElement;
 import com.sunshine.application.process.context.ProcessContext;
 
 import javax.tools.JavaFileObject;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 
 /**
@@ -20,7 +19,7 @@ public class DefaultGeneratorImpl extends AbstractGenerator {
     private static final String SUFFIX = "_Impl";
     
     @Override
-    protected void generatorSourceFile(GeneratorContext context, ProcessContext processContext) {
+    protected void generatorSourceFile(ModelElement context, ProcessContext processContext) {
         context.setClassName(PREFIX + context.getInterfaceName() + SUFFIX);
         try {
             JavaFileObject sourceFile = processContext.getFiler().createSourceFile(context.getClassName());

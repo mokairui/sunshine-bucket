@@ -7,7 +7,7 @@ import java.util.List;
  * @description
  * @since 2023/10/14
  */
-public class GeneratorContext {
+public class ModelElement {
     private String interfaceName;
     private String packageName;
     private List<String> importList;

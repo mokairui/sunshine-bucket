@@ -1,6 +1,6 @@
 package com.sunshine.service.generate;
 
-import com.sunshine.service.generate.model.GeneratorContext;
+import com.sunshine.service.generate.model.ModelElement;
 import com.sunshine.application.process.context.ProcessContext;
 
 /**
@@ -10,6 +10,6 @@ import com.sunshine.application.process.context.ProcessContext;
  */
 public interface IGenerator {
     
-    void generator(GeneratorContext context, ProcessContext processContext);
+    void generator(ModelElement context, ProcessContext processContext);
     
 }

@@ -4,10 +4,10 @@ import com.google.auto.service.AutoService;
 import com.sunshine.application.process.context.ProcessContext;
 import com.sunshine.service.generate.IGenerator;
 import com.sunshine.service.generate.impl.DefaultGeneratorImpl;
-import com.sunshine.service.generate.model.GeneratorContext;
+import com.sunshine.service.generate.model.ModelElement;
+import com.sunshine.service.processor.ModelElementProcessor;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -19,13 +19,12 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.TypeMirror;
-import javax.tools.JavaFileObject;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.ServiceLoader;
 import java.util.Set;
 
 /**
@@ -63,47 +62,14 @@ public class MappingProcess extends AbstractProcessor {
                 continue;
             }
 
+            Object model = null;
+
             // 取出所有注解修饰的类, @Mapper 限制了只能标注在类上, 那么elements就都是类的类型了
             Set<? extends Element> annotationElements = roundEnv.getElementsAnnotatedWith(typeElement);
             for (Element annotationElement : annotationElements) {
-                // 获取接口下所有的属性
-                List<? extends Element> enclosedElements = annotationElement.getEnclosedElements();
-                for (Element element : enclosedElements) {
-                    if (element.getKind() == ElementKind.METHOD) {
-                        // 获取元素被包裹的元素类型
-                        Element enclosingElement = element.getEnclosingElement();
-                        // 转为类的类型因为方法的包裹肯定是类元素, 通过类元素获取其全限定类名
-                        String qualifiedName = ((TypeElement) enclosingElement).getQualifiedName().toString();
-                        String packageName = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
-                        String className = qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1, qualifiedName.length());
-
-                        ExecutableElement executableElement = (ExecutableElement) element;
-                        // 获取方法的返回类型
-                        TypeMirror typeMirror = executableElement.getReturnType();
-                        String methodName = executableElement.getSimpleName().toString();
-                        // 获取方法的参数类型
-                        List<? extends VariableElement> parameters = executableElement.getParameters();
-                        List<String> paramQualifierNameList = new ArrayList<>(parameters.size());
-                        List<String> importNameList = new ArrayList<>(parameters.size());
-                        for (VariableElement parameter : parameters) {
-                            // 获取参数的全限定类名
-                            String paramQualifiedName = parameter.asType().toString();
-                            importNameList.add(paramQualifiedName);
-                            String paramName = paramQualifiedName.substring(paramQualifiedName.lastIndexOf(".") + 1, paramQualifiedName.length());
-                            paramQualifierNameList.add(paramName);
-                        }
-
-                        GeneratorContext generatorContext = new GeneratorContext();
-                        generatorContext.setPackageName(packageName);
-                        generatorContext.setInterfaceName(className);
-                        generatorContext.setReturnType(typeMirror.toString());
-                        generatorContext.setFltName("clazzImpl.ftl");
-                        generatorContext.setImportList(importNameList);
-                        generatorContext.setParameters(paramQualifierNameList);
-                        generatorContext.setMethodName(methodName);
-                        IGenerator generator = new DefaultGeneratorImpl();
-                        generator.generator(generatorContext, processContext);
-                    }
+                Iterable<ModelElementProcessor<?, ?>> processors = getProcessors();
+                for (ModelElementProcessor<?, ?> processor : processors) {
+                    model = process(processor, processContext, annotationElement, model);
                 }
             }
         }
@@ -111,4 +77,32 @@ public class MappingProcess extends AbstractProcessor {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
+    private <P, R> R process(ModelElementProcessor<P, R> processor, ProcessContext processContext, Element annotationElement, Object model) {
+        P sourceModel = (P) model;
+        return processor.process(processContext, annotationElement, sourceModel);
+    }
+
+    @SuppressWarnings("all")
+    private Iterable<ModelElementProcessor<?, ?>> getProcessors() {
+        Iterator<ModelElementProcessor> iterator = ServiceLoader.load(
+                ModelElementProcessor.class, 
+                MappingProcess.class.getClassLoader()
+        ).iterator();
+        
+        List<ModelElementProcessor<?, ?>> processors = new ArrayList<>();
+        while (iterator.hasNext()) {
+            processors.add(iterator.next());
+        }
+        
+        processors.sort(new ProcessorComparator());
+        return processors;
+    }
+
+    private static class ProcessorComparator implements Comparator<ModelElementProcessor<?, ?>> {
+        @Override
+        public int compare(ModelElementProcessor<?, ?> o1, ModelElementProcessor<?, ?> o2) {
+            return Integer.compare(o2.getPriority(), o1.getPriority());
+        }
+    }
 }

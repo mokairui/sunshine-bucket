@@ -1,15 +1,12 @@
 package com.sunshine.service.generate;
 
-import com.sunshine.service.generate.model.GeneratorContext;
+import com.sunshine.service.generate.model.ModelElement;
 import com.sunshine.application.process.context.ProcessContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Mokairui
@@ -19,11 +16,11 @@ import java.util.Objects;
 public abstract class AbstractGenerator extends GeneratorConfig implements IGenerator {
 
     @Override
-    public void generator(GeneratorContext context, ProcessContext processContext) {
+    public void generator(ModelElement context, ProcessContext processContext) {
         generatorSourceFile(context, processContext);
     }
 
-    protected abstract void generatorSourceFile(GeneratorContext context, ProcessContext processContext);
+    protected abstract void generatorSourceFile(ModelElement context, ProcessContext processContext);
     
     protected void writeSourceFile(String ftl, Writer writer, Object dataMap) {
         try {
