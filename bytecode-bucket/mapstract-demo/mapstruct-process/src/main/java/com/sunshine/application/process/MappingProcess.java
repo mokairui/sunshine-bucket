@@ -80,15 +80,15 @@ public class MappingProcess extends AbstractProcessor {
     @SuppressWarnings("all")
     private Iterable<ModelElementProcessor<?, ?>> getProcessors() {
         Iterator<ModelElementProcessor> iterator = ServiceLoader.load(
-                ModelElementProcessor.class, 
+                ModelElementProcessor.class,
                 MappingProcess.class.getClassLoader()
         ).iterator();
-        
+
         List<ModelElementProcessor<?, ?>> processors = new ArrayList<>();
         while (iterator.hasNext()) {
             processors.add(iterator.next());
         }
-        
+
         processors.sort(new ProcessorComparator());
         return processors;
     }
