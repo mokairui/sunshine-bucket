@@ -1,4 +1,4 @@
-package com.sunshine.infrastructure;
+package com.sunshine.business01.infrastructure;
 
 /**
  * @author Mokairui
