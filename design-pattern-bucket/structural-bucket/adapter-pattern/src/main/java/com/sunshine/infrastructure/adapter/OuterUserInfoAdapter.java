@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public class OuterUserInfoAdapter extends OuterUser implements IUserInfo {
 
-    private Map<String, String> baseInfo = super.getUserBaseInfo(); //员工的基本信息
-    private Map<String, String> homeInfo = super.getUserHomeInfo(); //员工的家庭 信息
-    private Map<String, String> officeInfo = super.getUserOfficeInfo(); //工作信息
+    private final Map<String, String> baseInfo = super.getUserBaseInfo(); //员工的基本信息
+    private final Map<String, String> homeInfo = super.getUserHomeInfo(); //员工的家庭 信息
+    private final Map<String, String> officeInfo = super.getUserOfficeInfo(); //工作信息
     
     @Override
     public String getUserName() {
