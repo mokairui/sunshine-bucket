@@ -1,8 +1,8 @@
-package com.sunshine.infrastructure;
+package com.sunshine.infrastructure.product;
 
 /**
  * @author Mokairui
- * @description
+ * @description 公司的产品, 抽象出两个方法 生成 和 出售
  * @since 2023/11/1
  */
 public abstract class Product {
