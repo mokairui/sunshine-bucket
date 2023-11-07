@@ -12,6 +12,7 @@
         <module>adapter-pattern</module>
         <module>bridge-pattern</module>
         <module>decorator-pattern</module>
+        <module>composite-pattern</module>
     </modules>
 
     <properties>
