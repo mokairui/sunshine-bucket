@@ -58,7 +58,6 @@ public class Client {
         root.addSubordinate(salesDep);
         root.addSubordinate(financeDep);
 
-
         //研发部经理
         developDep.addSubordinate(zhengLaoLiu);
         developDep.addSubordinate(firstDevGroup);

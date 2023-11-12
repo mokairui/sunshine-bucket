@@ -9,7 +9,7 @@ import java.util.List;
  * @since 2023/11/7
  */
 public class Branch extends Corp {
-    private List<Corp> subordinateList = new ArrayList<>();
+    private final List<Corp> subordinateList = new ArrayList<>();
     
     public Branch(String name, String position, int salary) {
         super(name, position, salary);
