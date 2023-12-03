@@ -3,20 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sunshine</groupId>
+        <artifactId>behavioral-bucket</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <groupId>com.sunshine</groupId>
-    <artifactId>behavioral-bucket</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>command-pattern</module>
-        <module>Iterator-pattern</module>
-        <module>observer-pattern</module>
-        <module>chain-of-responsibility-pattern</module>
-        <module>visitor-pattern</module>
-        <module>state-pattern</module>
-        <module>mediator-pattern</module>
-    </modules>
+    <artifactId>mediator-pattern</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
