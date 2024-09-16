@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
  * @since 2023/9/30
  */
 public class MonitorMethod {
-    
+
     @RuntimeType
     public static Object intercept(@This Object obj, @Origin Method method, @SuperCall Callable<?> callable, @AllArguments Object... args) throws Exception {
         long start = System.currentTimeMillis();

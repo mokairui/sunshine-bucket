@@ -13,7 +13,7 @@ import java.lang.instrument.Instrumentation;
  * @since 2023/9/30
  */
 public class PreAgent {
-    
+
     public static void premain(String agentArgs, Instrumentation inst) {
         System.out.println("hi premain :" + agentArgs);
         AgentBuilder.Transformer transformer = (builder, typeDescription, classLoader, javaModule, domain) -> {
@@ -29,5 +29,5 @@ public class PreAgent {
                 .transform(transformer)
                 .installOn(inst);
     }
-    
+
 }
